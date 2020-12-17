@@ -14,7 +14,10 @@ module.exports = {
 
       defaultConfig: {
         filePattern: 'index.html',
-        prefix: '',
+        prefix: function(context) {
+          var revisionKey = context.revisionData && context.revisionData.revisionKey;
+          return context.commandOptions.revision || revisionKey;
+        },
         acl: 'public-read',
         cacheControl: 'max-age=0, no-cache',
         distDir: function(context) {
